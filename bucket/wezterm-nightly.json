@@ -29,7 +29,7 @@
         "        Set-Content \"$dir\\$_.reg\" $content -Encoding Ascii -Force",
         "    }",
         "}",
-        "& \"$bucketsdir\\wezterm-conpty\\scripts\\install-conpty.ps1\" -WezTermDirectory $dir"
+        "& \"$bucketsdir\\zibo-scoop-bucket\\scripts\\install-conpty.ps1\" -WezTermDirectory $dir"
     ],
     "bin": [
         "wezterm.exe",
