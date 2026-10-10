@@ -1,5 +1,5 @@
 {
-    "version": "nightly",
+    "version": "nightly-20261009.040744",
     "description": "GPU-accelerated terminal emulator (nightly builds) with a current Microsoft ConPTY runtime",
     "homepage": "https://github.com/wez/wezterm",
     "license": "Apache-2.0",
@@ -43,5 +43,19 @@
     ],
     "uninstaller": {
         "script": "if ($cmd -eq 'uninstall') { reg import \"$dir\\uninstall-context.reg\" *> $null }"
+    },
+    "checkver": {
+        "script": [
+            "$release = Invoke-RestMethod 'https://api.github.com/repos/wez/wezterm/releases/tags/nightly'",
+            "$asset = $release.assets | Where-Object { $_.name -eq 'WezTerm-windows-nightly.zip' }",
+            "([DateTime]$asset.updated_at).ToUniversalTime().ToString('yyyyMMdd.HHmmss')"
+        ]
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-windows-nightly.zip"
+            }
+        }
     }
 }
