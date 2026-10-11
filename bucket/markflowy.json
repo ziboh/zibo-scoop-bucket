@@ -5,9 +5,9 @@
     "license": "AGPL-3.0",
     "notes": [
         "MarkFlowy stores settings and user data outside the Scoop app directory, so upgrades retain your configuration.",
-        "Optional file associations (.md, .markdown, .json, .txt): powershell -ExecutionPolicy Bypass -File \"$dir\\markflowy-file-assoc.ps1\"",
-        "The script reports any extension whose per-user default (Open with -> Always use this app) already points to another app; Windows gives that choice priority, so repoint it manually if you want MarkFlowy there.",
-        "Remove the associations later with: powershell -ExecutionPolicy Bypass -File \"$dir\\markflowy-file-assoc.ps1\" -Uninstall"
+        "File associations (.md, .markdown, .json, .txt) are re-registered automatically on install and update, pointing at the stable apps\\markflowy\\current junction.",
+        "Windows gives an explicit per-user choice (Open with -> Always use this app) priority over these defaults; switch via right-click -> Open with -> Choose another app.",
+        "Manual re-run or removal: powershell -ExecutionPolicy Bypass -File \"$dir\\markflowy-file-assoc.ps1\" (append -Uninstall to remove)."
     ],
     "architecture": {
         "64bit": {
@@ -23,7 +23,10 @@
             "MarkFlowy"
         ]
     ],
-    "post_install": "Copy-Item \"$bucketsdir\\zibo-scoop-bucket\\scripts\\markflowy-file-assoc.ps1\" \"$dir\\markflowy-file-assoc.ps1\" -Force",
+    "post_install": [
+        "Copy-Item \"$bucketsdir\\zibo-scoop-bucket\\scripts\\markflowy-file-assoc.ps1\" \"$dir\\markflowy-file-assoc.ps1\" -Force",
+        "& powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$dir\\markflowy-file-assoc.ps1\""
+    ],
     "uninstaller": {
         "script": "if (Test-Path \"$dir\\markflowy-file-assoc.ps1\") { & powershell.exe -ExecutionPolicy Bypass -File \"$dir\\markflowy-file-assoc.ps1\" -Uninstall }"
     },

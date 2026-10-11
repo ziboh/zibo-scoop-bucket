@@ -35,7 +35,14 @@ $ErrorActionPreference = 'Stop'
 if (-not $AppPath) {
     $scriptDir = $PSScriptRoot
     if (-not $scriptDir) { $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition }
-    $AppPath = Join-Path $scriptDir 'MarkFlowy.exe'
+    $candidate = Join-Path $scriptDir 'MarkFlowy.exe'
+    # Under Scoop the script lives in the versioned dir (apps\<app>\<version>),
+    # so prefer the stable apps\<app>\current junction: the registered command
+    # keeps working across updates, and Scoop switches 'current' before
+    # post_install runs, so the junction is already live at this point.
+    $scoopCurrent = Join-Path (Split-Path -Parent $scriptDir) 'current\MarkFlowy.exe'
+    if (Test-Path -LiteralPath $scoopCurrent) { $candidate = $scoopCurrent }
+    $AppPath = $candidate
 }
 
 $progId = 'MarkFlowy.Document'
