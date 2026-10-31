@@ -1,5 +1,5 @@
 {
-    "version": "1.2.1",
+    "version": "1.2.3",
     "description": "Local-first Markdown editor with visual, source, and reading modes",
     "homepage": "https://github.com/drl990114/MarkFlowy",
     "license": "AGPL-3.0",
@@ -11,8 +11,8 @@
     ],
     "architecture": {
         "64bit": {
-            "url": "https://github.com/drl990114/MarkFlowy/releases/download/v1.2.1/MarkFlowy_v1.2.1_x64_portable.zip",
-            "hash": "6e3cce7a0104b5d93e2055aa407e854b167c8c4c7ec54800d1135fe46d02ecef"
+            "url": "https://github.com/drl990114/MarkFlowy/releases/download/v1.2.3/MarkFlowy_v1.2.3_x64_portable.zip",
+            "hash": "1904768838d0aaec90c27016de796cfe12755ef689f1cb301dc001d689166f7b"
         }
     },
     "extract_dir": "MarkFlowy-portable",
